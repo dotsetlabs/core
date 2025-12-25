@@ -53,6 +53,7 @@ export {
     printBanner,
     PRODUCT_NAMES,
     PRODUCT_DESCRIPTIONS,
+    PLATFORM_TAGLINE,
 } from './ui.js';
 
 // API client
@@ -73,13 +74,5 @@ export {
     getAuthUrl,
 } from './api.js';
 
-// Integrations
-export {
-    type ProductDetection,
-    isProductInstalled,
-    detectProduct,
-    detectAllProducts,
-    getInstalledProducts,
-    getPackageName,
-    getInstallCommand,
-} from './integrations.js';
+// Tachyon configuration
+export * from './tachyon.js';

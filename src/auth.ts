@@ -24,6 +24,8 @@ export interface Credentials {
     email?: string;
     /** User ID */
     userId?: string;
+    /** Auth provider */
+    provider?: 'github' | 'google';
 }
 
 // ─────────────────────────────────────────────────────────────

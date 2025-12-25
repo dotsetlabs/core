@@ -124,10 +124,15 @@ export const PRODUCT_NAMES = {
 } as const;
 
 /**
- * Product descriptions
+ * Product descriptions (modules of the unified dotset platform)
  */
 export const PRODUCT_DESCRIPTIONS = {
-    axion: 'Secrets Management',
-    gluon: 'Security Monitoring',
-    tachyon: 'Secure Tunnels',
+    axion: 'Zero-disk encrypted secrets',
+    gluon: 'Runtime security telemetry',
+    tachyon: 'Zero-trust dev tunnels',
 } as const;
+
+/**
+ * Platform tagline
+ */
+export const PLATFORM_TAGLINE = 'The Secure Developer Runtime' as const;
