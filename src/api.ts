@@ -156,6 +156,14 @@ export interface CloudUser {
     email: string;
     name: string;
     avatarUrl?: string;
+    provider?: 'github' | 'google';
+    subscription?: {
+        status: string;
+        plan: string;
+        effectivePlan: string;
+        endsAt?: string;
+    };
+    createdAt?: string;
 }
 
 // ─────────────────────────────────────────────────────────────

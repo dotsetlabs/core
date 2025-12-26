@@ -28,6 +28,7 @@ export {
 // Authentication
 export {
     type Credentials,
+    type ProjectPermission,
     getGlobalConfigDir,
     getCredentialsPath,
     getApiUrl,
@@ -38,6 +39,19 @@ export {
     getAccessToken,
     requireAuth,
     AuthRequiredError,
+    // RBAC Permission Utilities
+    PermissionDeniedError,
+    getProjectPermission,
+    canAccessScope,
+    hasPermission,
+    canWrite,
+    getRole,
+    requireScopeAccess,
+    requirePermission,
+    permissionsNeedRefresh,
+    updatePermissions,
+    refreshPermissions,
+    ensurePermissions,
 } from './auth.js';
 
 // UI helpers
