@@ -4,6 +4,8 @@
  * Shared terminal output formatting for all CLIs.
  */
 
+import { ProductKey } from './project.js';
+
 // ─────────────────────────────────────────────────────────────
 // ANSI Color Codes
 // ─────────────────────────────────────────────────────────────
@@ -29,9 +31,10 @@ export const COLORS = {
     brightCyan: '\x1b[96m',
 
     // Product colors (for branding)
-    axion: '\x1b[32m',    // Green
-    gluon: '\x1b[36m',    // Cyan
-    tachyon: '\x1b[35m',  // Magenta/Violet
+    axion: '\x1b[32m',      // Green
+    gluon: '\x1b[34m',      // Blue
+    hadron: '\x1b[33m',     // Yellow (Orange)
+    lagrangian: '\x1b[35m',  // Magenta (Pink/Purple)
 } as const;
 
 // ─────────────────────────────────────────────────────────────
@@ -50,7 +53,8 @@ export const colors = {
     // Product-specific
     axion: (text: string) => `${COLORS.axion}${text}${COLORS.reset}`,
     gluon: (text: string) => `${COLORS.gluon}${text}${COLORS.reset}`,
-    tachyon: (text: string) => `${COLORS.tachyon}${text}${COLORS.reset}`,
+    hadron: (text: string) => `${COLORS.hadron}${text}${COLORS.reset}`,
+    lagrangian: (text: string) => `${COLORS.lagrangian}${text}${COLORS.reset}`,
 };
 
 // ─────────────────────────────────────────────────────────────
@@ -109,7 +113,7 @@ export function debug(message: string): void {
 /**
  * Print the dotset labs banner
  */
-export function printBanner(product?: 'axion' | 'gluon' | 'tachyon'): void {
+export function printBanner(product?: ProductKey): void {
     const productColor = product ? COLORS[product] : COLORS.cyan;
     console.log(`${COLORS.bold}${productColor}dotset${COLORS.reset}${product ? ` ${COLORS.dim}${product}${COLORS.reset}` : ''}`);
 }
@@ -120,7 +124,8 @@ export function printBanner(product?: 'axion' | 'gluon' | 'tachyon'): void {
 export const PRODUCT_NAMES = {
     axion: 'Axion',
     gluon: 'Gluon',
-    tachyon: 'Tachyon',
+    hadron: 'Hadron',
+    lagrangian: 'Lagrangian',
 } as const;
 
 /**
@@ -129,7 +134,8 @@ export const PRODUCT_NAMES = {
 export const PRODUCT_DESCRIPTIONS = {
     axion: 'Zero-disk encrypted secrets',
     gluon: 'Runtime security telemetry',
-    tachyon: 'Zero-trust dev tunnels',
+    hadron: 'Local GitHub Actions runtime',
+    lagrangian: 'Capture and replay production errors',
 } as const;
 
 /**

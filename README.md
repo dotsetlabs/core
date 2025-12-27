@@ -10,7 +10,7 @@ This package is **not intended for direct use**. It provides:
 
 - Unified project configuration (`.dotset/project.yaml`)
 - Shared authentication (`~/.dotset/credentials.yaml`)
-- Product CLI detection utilities
+- Shared terminal output formatting (printBanner)
 - Common UI helpers and colors
 - Base API client for cloud operations
 
@@ -48,7 +48,6 @@ If you want to use the dotset labs tools, install one of these packages instead:
 - **[@dotsetlabs/cli](https://www.npmjs.com/package/@dotsetlabs/cli)** — Unified CLI with all products
 - **[@dotsetlabs/axion](https://www.npmjs.com/package/@dotsetlabs/axion)** — Secrets management
 - **[@dotsetlabs/gluon](https://www.npmjs.com/package/@dotsetlabs/gluon)** — Runtime telemetry
-- **[@dotsetlabs/tachyon](https://www.npmjs.com/package/@dotsetlabs/tachyon)** — Secure tunnels
 
 ## License
 

@@ -11,6 +11,7 @@ export {
     DOTSET_DIR,
     PROJECT_CONFIG_FILE,
     GLOBAL_CONFIG_DIR,
+    ALL_PRODUCTS,
     getDotsetDir,
     getProjectConfigPath,
     getProductDir,
@@ -18,8 +19,6 @@ export {
     loadProjectConfig,
     saveProjectConfig,
     initializeProject,
-    enableProduct,
-    disableProduct,
     linkToCloud,
     unlinkFromCloud,
     isCloudLinked,
@@ -82,11 +81,7 @@ export {
     createCloudProject,
     getCloudProject,
     listCloudProjects,
-    enableCloudProduct,
-    disableCloudProduct,
     getCurrentUser,
     getAuthUrl,
 } from './api.js';
 
-// Tachyon configuration
-export * from './tachyon.js';

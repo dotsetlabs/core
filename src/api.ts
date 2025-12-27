@@ -144,9 +144,6 @@ export interface CloudProject {
     id: string;
     name: string;
     ownerId: string;
-    axionEnabled: boolean;
-    gluonEnabled: boolean;
-    tachyonEnabled: boolean;
     createdAt: string;
     updatedAt: string;
 }
@@ -175,9 +172,6 @@ export interface CloudUser {
  */
 export async function createCloudProject(data: {
     name: string;
-    axionEnabled?: boolean;
-    gluonEnabled?: boolean;
-    tachyonEnabled?: boolean;
 }): Promise<CloudProject> {
     return post<CloudProject>('/projects', data);
 }
@@ -194,20 +188,6 @@ export async function getCloudProject(id: string): Promise<CloudProject> {
  */
 export async function listCloudProjects(): Promise<CloudProject[]> {
     return get<CloudProject[]>('/projects');
-}
-
-/**
- * Enable a product on a cloud project
- */
-export async function enableCloudProduct(projectId: string, product: 'axion' | 'gluon' | 'tachyon'): Promise<CloudProject> {
-    return post<CloudProject>(`/projects/${projectId}/enable/${product}`);
-}
-
-/**
- * Disable a product on a cloud project
- */
-export async function disableCloudProduct(projectId: string, product: 'axion' | 'gluon' | 'tachyon'): Promise<CloudProject> {
-    return post<CloudProject>(`/projects/${projectId}/disable/${product}`);
 }
 
 // ─────────────────────────────────────────────────────────────

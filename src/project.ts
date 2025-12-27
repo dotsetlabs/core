@@ -13,19 +13,14 @@ import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 // Types
 // ─────────────────────────────────────────────────────────────
 
-export type ProductKey = 'axion' | 'gluon' | 'tachyon';
+/** Available products in the dotset platform */
+export type ProductKey = 'axion' | 'gluon' | 'hadron' | 'lagrangian';
 
 export interface ProjectConfig {
     /** Schema version */
     version: 1;
     /** Project name */
     name: string;
-    /** Enabled products */
-    products: {
-        axion: boolean;
-        gluon: boolean;
-        tachyon: boolean;
-    };
     /** Cloud project ID (null if local-only) */
     cloudProjectId: string | null;
     /** When project was created */
@@ -44,6 +39,9 @@ export const PROJECT_CONFIG_FILE = 'project.yaml';
 
 /** Global config directory */
 export const GLOBAL_CONFIG_DIR = join(homedir(), '.dotset');
+
+/** All available products (always enabled) */
+export const ALL_PRODUCTS: ProductKey[] = ['axion', 'gluon', 'hadron', 'lagrangian'];
 
 // ─────────────────────────────────────────────────────────────
 // Path Helpers
@@ -113,10 +111,10 @@ export function saveProjectConfig(config: ProjectConfig, cwd: string = process.c
 
 /**
  * Initialize a new project
+ * All products (Axion, Gluon) are enabled by default.
  */
 export function initializeProject(options: {
     name?: string;
-    products: { axion: boolean; gluon: boolean; tachyon: boolean };
     cloudProjectId?: string;
     cwd?: string;
 }): ProjectConfig {
@@ -126,7 +124,6 @@ export function initializeProject(options: {
     const config: ProjectConfig = {
         version: 1,
         name,
-        products: options.products,
         cloudProjectId: options.cloudProjectId ?? null,
         createdAt: new Date().toISOString(),
     };
@@ -137,54 +134,17 @@ export function initializeProject(options: {
         mkdirSync(dotsetDir, { recursive: true });
     }
 
-    // Create product directories for enabled products
-    for (const [product, enabled] of Object.entries(options.products)) {
-        if (enabled) {
-            const productDir = getProductDir(product as ProductKey, cwd);
-            if (!existsSync(productDir)) {
-                mkdirSync(productDir, { recursive: true });
-            }
+    // Create product directories (all products enabled by default)
+    for (const product of ALL_PRODUCTS) {
+        const productDir = getProductDir(product, cwd);
+        if (!existsSync(productDir)) {
+            mkdirSync(productDir, { recursive: true });
         }
     }
 
     // Save config
     saveProjectConfig(config, cwd);
 
-    return config;
-}
-
-/**
- * Enable a product on an existing project
- */
-export function enableProduct(product: ProductKey, cwd: string = process.cwd()): ProjectConfig {
-    const config = loadProjectConfig(cwd);
-    if (!config) {
-        throw new Error('No dotset project found. Run `dotset init` first.');
-    }
-
-    config.products[product] = true;
-
-    // Create product directory
-    const productDir = getProductDir(product, cwd);
-    if (!existsSync(productDir)) {
-        mkdirSync(productDir, { recursive: true });
-    }
-
-    saveProjectConfig(config, cwd);
-    return config;
-}
-
-/**
- * Disable a product on an existing project
- */
-export function disableProduct(product: ProductKey, cwd: string = process.cwd()): ProjectConfig {
-    const config = loadProjectConfig(cwd);
-    if (!config) {
-        throw new Error('No dotset project found. Run `dotset init` first.');
-    }
-
-    config.products[product] = false;
-    saveProjectConfig(config, cwd);
     return config;
 }
 

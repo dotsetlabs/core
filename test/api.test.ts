@@ -64,7 +64,6 @@ describe('API Module', () => {
                 ownerId: 'user-456',
                 axionEnabled: true,
                 gluonEnabled: false,
-                tachyonEnabled: true,
                 createdAt: '2024-01-01T00:00:00Z',
                 updatedAt: '2024-01-01T00:00:00Z',
             };
